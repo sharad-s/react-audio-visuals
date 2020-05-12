@@ -1,2 +1,2 @@
 import Spiral from './components/Spiral'
-export default Spiral;
+export default Spiral
