@@ -67,7 +67,8 @@ class App extends React.Component {
     camera.position.set(0, 0, 175)
 
     // Renderer
-    renderer = new THREE.CanvasRenderer({ alpha: true })
+    // renderer = new THREE.CanvasRenderer({ alpha: true })
+    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(parent.clientWidth, parent.clientHeight)
     renderer.setClearColor(0x000000, 0)
 
@@ -82,19 +83,27 @@ class App extends React.Component {
   // Set up Particles Geometry
   setupParticles() {
     let particle
-    for (let i = 0; i <= 2048; i++) {
-      const material = new THREE.SpriteCanvasMaterial({
-        color: 0x000000,
-        program: function (context) {
-          context.beginPath()
-          context.arc(0, 0, 0.33, 0, PI2)
-          context.fill()
-        }
-      })
-      particle = particles[i++] = new THREE.Particle(material)
+    const particleGroup = new THREE.Group();
 
-      scene.add(particle)
+    for (let i = 0; i <= 2048; i++) {
+      // let material = new THREE.SpriteCanvasMaterial({
+      //   color: 0x000000,
+      //   program: function (context) {
+      //     context.beginPath()
+      //     context.arc(0, 0, 0.33, 0, PI2)
+      //     context.fill()
+      //   }
+      // })
+
+      //WebGL
+      let geometry = new THREE.SphereGeometry( 0.33, 0.33, 0.33 );
+      let material = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+
+      // particle = particles[i++] = new THREE.Particle(material)
+      particle = particles[i++] = new THREE.Mesh( geometry, material );
+      particleGroup.add(particle)
     }
+    scene.add(particleGroup);
   }
 
   animate = () => {

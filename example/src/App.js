@@ -6,8 +6,8 @@ const BW = "B";
 
 const styles = {
   wrapper: {
-    height: "50vh",
-    width: "50vw",
+    height: "100%",
+    width: "100%",
     bottom: 0,
     left: 0,
     display: "flex",
@@ -15,6 +15,7 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     zIndex: -1,
+    position: "absolute",
     backgroundColor: BW === "B" ? "black" : "white",
   },
   text: {
