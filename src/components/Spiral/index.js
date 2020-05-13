@@ -173,6 +173,7 @@ class App extends React.Component {
 
     audio.addEventListener('play', () => {
       console.log('PLAY event')
+      ctx.resume();
     })
 
     audio.addEventListener('pause', () => {
