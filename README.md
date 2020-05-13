@@ -4,7 +4,7 @@
 Originally created by soniaboller:
 https://soniaboller.github.io/audible-visuals/
 
-[![NPM](https://img.shields.io/npm/v/test.svg)](https://www.npmjs.com/package/react-audio-visuals) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/react-audio-visuals.svg)](https://www.npmjs.com/package/react-audio-visuals) 
 
 ## Install
 
