@@ -1,13 +1,19 @@
 import React from 'react'
-import THREE from '../../lib/getThree.min'
-
-import { PI2 } from '../../utils/constants'
-// import isEmpty from "../../utils/isEmpty";
 
 // AudioContext
 import { ctx, analyser } from '../../utils/getAnalyser'
 
 import styles from '../../styles.module.css'
+const { 
+  Scene, 
+  PerspectiveCamera,
+  WebGLRenderer, 
+  Group, 
+  SphereGeometry,
+  MeshBasicMaterial,
+  Mesh
+ } = require('three')
+
 
 // ThreeJS
 var camera, scene, renderer, canvas
@@ -50,7 +56,7 @@ class App extends React.Component {
     // Get parent element
     parent = this.poop.parentElement
 
-    scene = new THREE.Scene()
+    scene = new Scene()
 
     // Camera
     const cameraSettings = {
@@ -58,7 +64,7 @@ class App extends React.Component {
       width: parent.clientWidth,
       height: parent.clientHeight
     }
-    camera = new THREE.PerspectiveCamera(
+    camera = new PerspectiveCamera(
       cameraSettings.fov,
       cameraSettings.width / cameraSettings.height,
       1,
@@ -68,7 +74,7 @@ class App extends React.Component {
 
     // Renderer
     // renderer = new THREE.CanvasRenderer({ alpha: true })
-    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer = new WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(parent.clientWidth, parent.clientHeight)
     renderer.setClearColor(0x000000, 0)
 
@@ -83,24 +89,15 @@ class App extends React.Component {
   // Set up Particles Geometry
   setupParticles() {
     let particle
-    const particleGroup = new THREE.Group();
+    const particleGroup = new Group();
 
     for (let i = 0; i <= 2048; i++) {
-      // let material = new THREE.SpriteCanvasMaterial({
-      //   color: 0x000000,
-      //   program: function (context) {
-      //     context.beginPath()
-      //     context.arc(0, 0, 0.33, 0, PI2)
-      //     context.fill()
-      //   }
-      // })
-
       //WebGL
-      let geometry = new THREE.SphereGeometry( 0.33, 0.33, 0.33 );
-      let material = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+      let geometry = new SphereGeometry(0.33, 0.33, 0.33);
+      let material = new MeshBasicMaterial({ color: 0xffff00 });
 
       // particle = particles[i++] = new THREE.Particle(material)
-      particle = particles[i++] = new THREE.Mesh( geometry, material );
+      particle = particles[i++] = new Mesh(geometry, material);
       particleGroup.add(particle)
     }
     scene.add(particleGroup);
