@@ -11,7 +11,8 @@ const {
   Group, 
   SphereGeometry,
   MeshBasicMaterial,
-  Mesh
+  Mesh,
+  BufferGeometry
  } = require('three')
 
 
@@ -93,7 +94,7 @@ class App extends React.Component {
 
     for (let i = 0; i <= 2048; i++) {
       //WebGL
-      let geometry = new SphereGeometry(0.33, 0.33, 0.33);
+      let geometry = new BufferGeometry().fromGeometry(new SphereGeometry(0.33, 0.33, 0.33));
       let material = new MeshBasicMaterial({ color: 0xffff00 });
 
       // particle = particles[i++] = new THREE.Particle(material)
