@@ -1,13 +1,14 @@
 import React, { useRef, Fragment } from "react";
 import Spiral from "react-audio-visuals"
-import AudioPlayer from "./components/AudioPlayer";
+import AudioPlayer from "./AudioPlayer";
 
 const BW = "B";
 
 const styles = {
   wrapper: {
-    height: "50vh",
-    width: "50vw",
+    height: "100%",
+    width: "100%",
+    position: "absolute",
     bottom: 0,
     left: 0,
     display: "flex",
