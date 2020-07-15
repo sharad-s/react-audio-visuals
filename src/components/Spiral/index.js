@@ -42,8 +42,8 @@ class App extends React.Component {
 
     this.setupRendering()
     this.setupParticles()
-    this.setupEventHandlers()
     this.animate()
+    this.setupEventHandlers()
   }
 
   setupRendering() {
@@ -170,6 +170,8 @@ class App extends React.Component {
     const ref = this.props.audioRef2 || this.props.audioRef
     const audio = ref.current
     const source = ctx.createMediaElementSource(audio) // creates audio source
+    source.connect(ctx.destination) // connects the audioNode to the audioDestinationNode (computer speakers)
+    source.connect(analyser) // connects the analyser node to the audioNode and the audioDestinationNode
 
     audio.addEventListener('play', () => {
       console.log('PLAY event')
@@ -182,8 +184,8 @@ class App extends React.Component {
 
     audio.addEventListener('loadeddata', () => {
       console.log('LOADED_DATA event')
-      source.connect(ctx.destination) // connects the audioNode to the audioDestinationNode (computer speakers)
-      source.connect(analyser) // connects the analyser node to the audioNode and the audioDestinationNode
+      // source.connect(ctx.destination) // connects the audioNode to the audioDestinationNode (computer speakers)
+      // source.connect(analyser) // connects the analyser node to the audioNode and the audioDestinationNode
     })
 
     audio.addEventListener('ended', () => {
