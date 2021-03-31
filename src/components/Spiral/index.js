@@ -37,7 +37,19 @@ class App extends React.Component {
       radius: 65,
       minRadius: 35,
       maxRadius: 65,
-      animate: true
+      animate: true,
+      flower: {
+        aFlower: 25,
+        bFlower: 0,
+        flowerAngle: 2.86,
+        counter: false
+      },
+      wavy: {
+        aWavy: 1.20,
+        bWavy: 0.76,
+        wavyAngle: 2.44,
+        counter: false,
+      }
     }
 
     this.setupRendering()
@@ -102,6 +114,9 @@ class App extends React.Component {
 
     this.animateParticles()
     this.changeCircleRadius()
+    this.changeFlowerAngle();
+    this.changeWavyAngle();
+
 
     camera.lookAt(scene.position)
     renderer.render(scene, camera)
@@ -120,6 +135,37 @@ class App extends React.Component {
           console.log('hit')
           circleCounter = true
         }
+      }
+    }
+  }
+
+  changeFlowerAngle() {
+    const { flower } = settings
+    if (flower.counter) {
+      flower.flowerAngle += 0.0000004;
+      if (flower.flowerAngle >= 2.87) {
+        flower.counter = false;
+      }
+    } else {
+      flower.flowerAngle -= 0.0000004;
+      if (flower.flowerAngle <= 2.85) {
+        flower.counter = true;
+      }
+    }
+  }
+
+
+  changeWavyAngle() {
+    const { wavy } = settings
+    if (wavy.counter) {
+      wavy.wavyAngle += 0.0000004;
+      if (wavy.wavyAngle >= 2.87) {
+        wavy.counter = false;
+      }
+    } else {
+      wavy.wavyAngle -= 0.0000004;
+      if (wavy.wavyAngle <= 2.85) {
+        wavy.counter = true;
       }
     }
   }
@@ -147,6 +193,31 @@ class App extends React.Component {
       particle.position.z = Math.cos(j) * (j / (j / radius))
       camera.position.y = 80
       camera.fov = 35
+
+      // Spiral
+      // const { flower } = settings;
+      // particle.position.x = (flower.aFlower + flower.bFlower * ((flower.flowerAngle / 100) * j))
+      //   * Math.cos(((flower.flowerAngle / 100) * j))
+      //   + Math.sin(j / (flower.flowerAngle / 100)) * 17;
+      // particle.position.z = (flower.aFlower + flower.bFlower * ((flower.flowerAngle / 100) * j))
+      //   * Math.sin(((flower.flowerAngle / 100) * j))
+      //   + Math.cos(j / (flower.flowerAngle / 100)) * 17;
+      // particle.position.y = (timeFloatData[j] * timeByteData[j] * intensity);
+      // camera.position.y = 0;
+      // camera.position.y = 80
+      // camera.fov = 35
+
+
+      // Wavey spiral
+      // const { wavy } = settings;
+      // particle.position.x = (wavy.aWavy + wavy.bWavy * ((wavy.wavyAngle / 100) * j))
+      //   * Math.sin(((wavy.wavyAngle / 100) * j))
+      //   + Math.sin(j / (wavy.wavyAngle / 100));
+      // particle.position.z = (wavy.aWavy + wavy.bWavy * ((wavy.wavyAngle / 100) * j))
+      //   * Math.cos(((wavy.wavyAngle / 100) * j))
+      //   + Math.cos(j / (wavy.wavyAngle / 100));
+      // particle.position.y = (timeFloatData[j] * timeByteData[j] * intensity);
+
     }
     camera.fov = settings.fov
     camera.updateProjectionMatrix()
